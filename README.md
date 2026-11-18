@@ -1,7 +1,7 @@
 # ASSET VAULT
 
 Single source of truth for design assets across four apps:
-**Figma** (app/web UI) · **Illustrator** (vector/posters) · **Fusion** (CAD) · **Blender** (3D illustration).
+**Figma** (app/web UI) · **Illustrator** (vector/posters) · **Plasticity** (personal CAD) · **Blender** (3D illustration).
 
 ## The rules
 
@@ -9,8 +9,9 @@ Single source of truth for design assets across four apps:
 2. **License-first:** no license → doesn't enter the vault. Log every addition in `00_admin/LICENSES.md`.
 3. **Inbox triage:** downloads land in `01_inbox/` and are sorted or deleted weekly. Weekly, no exceptions.
 4. **Naming:** `source-name_variant_license.ext` (e.g. `blush_outline-woman_cc0.svg`).
-5. **One format, one copy:** store the travel format (SVG / OTF / PNG / blend / STEP / f3d), never per-app duplicates.
+5. **One format, one copy:** store the travel format (SVG / OTF / PNG / blend / STEP), never per-app duplicates.
 6. **Asset Browser test:** a 3D asset that isn't marked/cataloged in Blender's Asset Browser isn't in the library.
+7. **Secrets stay out of git:** tokens/keys live only in `80_private/` (gitignored). Never paste tokens, keys, or passwords into chats, issues, or READMEs.
 
 ## Map
 
@@ -21,8 +22,9 @@ Single source of truth for design assets across four apps:
 | `30_ui/` | Figma (cloud-first) | exported kit bits + plugin reinstallers not kept in Figma |
 | `40_raster/` | all | photos, textures, mockups, palettes |
 | `50_blender/` | Blender | addons (.zip), asset libraries (.blend, marked as assets), HDRI, brushes |
-| `60_cad/` | Fusion / FreeCAD | .f3d project files, purchased stock STEP models |
+| `60_cad/` | Plasticity (later: NX Student) | STEP exports (`step-library/`) + read-only `.f3d` Fusion archive (`fusion/`) |
 | `70_poster/` | Illustrator | poster templates, print presets, final exports |
+| `80_private/` | (you) | tokens, license keys, installer copies — **never committed, gitignored** |
 
 ## Admin files
 

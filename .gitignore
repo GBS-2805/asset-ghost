@@ -8,3 +8,7 @@ Thumbs.db
 *.exr
 *.hdr
 !50_blender/hdri/.gitkeep
+
+# NEVER commit tokens/keys/license files (see 80_private/README.md)
+80_private/*
+!80_private/README.md
