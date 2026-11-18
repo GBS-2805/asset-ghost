@@ -1,4 +1,6 @@
-# ASSET VAULT
+# ASSET VAULT 🛒 → [**Open the live asset store**](https://gbs-2805.github.io/BC-Brand-Check/)
+
+> Live GitHub-mining store with sidebar categories → [tools/store.html](https://gbs-2805.github.io/BC-Brand-Check/tools/store.html) (requires Pages to be enabled in Settings; the .html file also works locally by double-clicking it)
 
 Single source of truth for design assets across four apps:
 **Figma** (app/web UI) · **Illustrator** (vector/posters) · **Plasticity** (personal CAD) · **Blender** (3D illustration).
