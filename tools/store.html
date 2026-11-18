@@ -27,6 +27,8 @@
   #status{padding:10px 18px;color:var(--dim);font-size:13px}
   #status.err{color:#ff9d9d}
   #grid{padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;overflow-y:auto;flex:1;align-content:start}
+  .thumb-wrap{display:block;margin:-14px -14px 8px;overflow:hidden;background:#111113}
+  .thumb{display:block;width:100%;height:130px;object-fit:cover;object-position:center 20%}
   .store-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
   .store-card:hover{border-color:var(--accent)}
   .store-card a.name{color:var(--accent);font-weight:600;font-size:14.5px;text-decoration:none;word-break:break-word}
@@ -61,7 +63,7 @@
   </header>
   <div id="status">Pick a category or type a search.</div>
   <div id="grid"></div>
-  <footer>Unauthenticated GitHub API: ~10 searches/min — if it complains, wait a minute. License pills: green = has license, red = none (vault rule: no license → don't take). <b>Never</b> paste a token into this file.</footer>
+  <footer>Unauthenticated GitHub API: ~10 searches/min — if it complains, wait a minute. License pills: green = has license, red = none (vault rule: no license → don't take). Previews: first image from each repo's README, else GitHub's banner. <b>Never</b> paste a token into this file.</footer>
 </main>
 <script>
 const CATEGORIES = [
@@ -92,9 +94,43 @@ async function fetchRepos(query, sort){
   return (await res.json()).items || [];
 }
 
+const OG = r => "https://opengraph.githubassets.com/seed1/" + r.full_name;
+const BAD_IMG = /shields\.io|travis|circleci|appveyor|badge|codecov|coveralls|workflows\//i;
+
+function toAbs(u, full, branch){
+  u = u.trim();
+  if(/^https?:\/\//.test(u)) return u.replace("/blob/", "/raw/");
+  return "https://raw.githubusercontent.com/" + full + "/" + branch + "/" + u.replace(/^\/+/, "");
+}
+
+async function upgradeThumb(r){
+  if(!r.default_branch) return;
+  const img = grid.querySelector('img[data-repo="' + CSS.escape(r.full_name) + '"]');
+  if(!img) return;
+  const og = img.src, full = r.full_name, branch = r.default_branch;
+  for(const name of ["README.md", "readme.md"]){
+    let text = "";
+    try{
+      const res = await fetch("https://raw.githubusercontent.com/" + full + "/" + branch + "/" + name);
+      if(res.ok) text = await res.text();
+    }catch(e){}
+    if(!text) continue;
+    const m = /!\[[^\]]*\]\(\s*<?([^)>\s]+)|<img[^>]+src=["']([^"']+)["']/.exec(text);
+    if(!m) continue;
+    let url = toAbs(m[1] || m[2], full, branch);
+    if(!/^https?:\/\//.test(url) || BAD_IMG.test(url)) continue;
+    img.onerror = () => { img.onerror = null; img.src = og; };
+    img.src = url;
+    return;
+  }
+}
+
 function render(repos){
   grid.innerHTML = repos.map(r => `
     <div class="store-card">
+      <a class="thumb-wrap" href="${r.html_url}" target="_blank" rel="noopener">
+        <img class="thumb" loading="lazy" alt="" src="${OG(r)}" data-repo="${esc(r.full_name)}">
+      </a>
       <a class="name" href="${r.html_url}" target="_blank" rel="noopener">${esc(r.full_name)}</a>
       <div class="desc">${esc(r.description || "— no description —")}</div>
       <div class="meta">
@@ -106,6 +142,7 @@ function render(repos){
         <span class="pill">${new Date(r.pushed_at).toISOString().slice(0,10)}</span>
       </div>
     </div>`).join("");
+  repos.forEach(r => upgradeThumb(r));
 }
 
 async function run(query, sort, label){
