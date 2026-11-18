@@ -1,6 +1,6 @@
-# Apps — roles & cheat sheets
+# Apps — final loadout (4)
 
-Four apps, four jobs. No overlap in what each manages.
+**Figma · Illustrator · Plasticity · Blender.** One job per app; files travel via SVG/OTF/PNG/STEP/blend.
 
 ## Figma — UI & app/web design
 - Cloud library is the database: kits, components, styles, plugins stay in Figma.
@@ -11,27 +11,19 @@ Four apps, four jobs. No overlap in what each manages.
 - Final composition/print engine for posters; SVG in/out with the vault.
 - Vault touchpoints: `10_fonts/`, `20_vector/`, `70_poster/`.
 
+## Plasticity — personal CAD (replaced Fusion, Feb 2026)
+- Direct NURBS modeling on Parasolid (same kernel as Fusion/NX — fillets/booleans feel familiar).
+- Academic license: free, perpetual, non-commercial, Indie edition. Applied via contact@plasticity.xyz from university email + student ID. Email-deletion mitigation: save token + installer offline; ask support to move contact to a personal email.
+- No feature tree — edit geometry directly; that's the only mental shift from Fusion.
+- Update channels: Discord #releases-stable. Job-safe: never touch company NX seats for personal work.
+- Vault touchpoint: `60_cad/`. Interchange: STEP.
+
 ## Blender — 3D illustration & depth
 - Grease Pencil (4.3+) for 2D illustration; Asset Browser is the 3D database.
-- Add-ons (max ~5): nijiGPen, Grease Pencil Tools, Malt NPR.
+- Add-ons (max ~5): nijiGPen (Blender 3.3–5.3), Grease Pencil Tools, Malt NPR.
 - Setup: File Paths → Asset Libraries → `50_blender/libraries/`; catalogs = Materials, Models.
 - Vault touchpoint: `50_blender/`. Test: if it's not marked as an Asset, it's not in the library.
 
-## CAD — Fusion status & exit plan (researched)
-
-**Fusion for personal use still exists** (autodesk.com/products/fusion-360/personal):
-free for qualifying hobbyists, renewed annually. Limits:
-- non-commercial only, **<$1,000/yr revenue** from designs (watch this if you ever sell poster-adjacent merch)
-- **10 active document cap** (archive finished designs to work around it)
-- limited CAM (2/2.5-axis mill, turning, FFF print prep — fine for desktop machines)
-- community verdict: most hobbyists "will not even notice the limitations" (r/Fusion360)
-
-**If Fusion ever becomes unusable, ranked for our use:**
-1. **FreeCAD 1.1.x** — full parametric CAD, free forever, 100% offline, you own the files. Clunky UX moments, but 1.0/1.1 fixed the broken-dependency-tree era. Best plain-CAD fallback.
-2. **Plasticity** — **perpetual/one-time** ($175 Indie, $299 Studio; 10+ employee companies need Studio). You own it forever; 12 months of updates included, after which you can freeze on your last version indefinitely — renewals are optional, not required. Indie runs on 2 machines. No subscriptions/payment plans exist. Trial: 30 days, non-commercial, OBJ/STL export only. Not parametric (no rollback) — great modelling, weaker re-editing. **Free academic license** (per plasticity.xyz/eula): also **perpetual**, non-commercial only, Indie edition; open to students, educators, veterans, retirees, persons with disabilities. It keeps working after graduation — you keep the last version forever — but renewing updates requires re-verifying eligibility, and any commercial work requires buying a paid license. **How to apply (per FAQ):** email contact@plasticity.xyz from your university email with a student ID or certificate of enrollment attached. No account/password exists — license token arrives by email. Node-locked: Indie = 2 machines, 10 activations/yr. **Email-deletion risk (if school retires your address):** installed copy keeps working (perpetual, offline activation) — the email only delivered the token; before graduating, save the token + installer offline and ask support to update the contact email on the license.
-3. **Onshape free** — browser-based, excellent sketcher, but **all documents public** and online-only. Only for non-confidential work.
-- **Decision (personal CAD):** Plasticity first. Both Plasticity and NX run on the Parasolid kernel, so the direct-modeling feel transfers. Plasticity = fast artist-friendly personal tool (non-commercial academic license). NX Student Edition = career skills for the employer's toolchain; student files don't open in commercial NX, and it's overkill for poster/hobby work. Not either/or — both are free at the same time.
-- Dark horses: **Dune 3D** (new, unusually easy to learn), **SolidWorks Maker** (~$48/yr promo pricing seen).
-- **Siemens NX (if employer uses it):** company seats are work-only — never borrow for personal projects. Legit personal path: **NX Student Edition** (free, Windows 64-bit, proof of enrollment; watermarks, non-commercial, files NOT openable in commercial NX → export STEP for the vault). Note also Solid Edge Student Edition (2D free for all, 3D free verified students).
-- Interchange format: **STEP**. Keep `60_cad/step-library/` app-independent so a switch never loses assets. .f3d carries nothing over.
-- Vault touchpoint: `60_cad/` (.f3d/.FCStd + STEP).
+## Legacy / dormant
+- **NX** — later, career-only path via free NX Student Edition (Windows, proof of enrollment; watermarks; files not openable in commercial NX → export STEP). Solid Edge Student is a lighter alternative.
+- **Fusion** — personal-use license still exists (<$1k/yr, 10 active docs) if ever needed; membership discarded by choice. Migration checklist lives in `60_cad/README.md`.
