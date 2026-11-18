@@ -17,11 +17,19 @@ Four apps, four jobs. No overlap in what each manages.
 - Setup: File Paths → Asset Libraries → `50_blender/libraries/`; catalogs = Materials, Models.
 - Vault touchpoint: `50_blender/`. Test: if it's not marked as an Asset, it's not in the library.
 
-## CAD — Fusion → what now?
-- **Fusion free personal license** still exists (annual re-confirmation, hobbyist features).
-- If leaving Fusion:
-  - **FreeCAD 1.x** — full GUI parametric CAD, free forever, .f3d won't carry over, STEP does.
-  - **Onshape free tier** — browser-based, cloud documents, strong sketcher.
-  - **Plasticity** — one-time purchase, CAD-style modeling with a designer-friendly UI.
-- Interchange format: STEP. Keep `60_cad/step-library/` app-independent so a switch never loses assets.
+## CAD — Fusion status & exit plan (researched)
+
+**Fusion for personal use still exists** (autodesk.com/products/fusion-360/personal):
+free for qualifying hobbyists, renewed annually. Limits:
+- non-commercial only, **<$1,000/yr revenue** from designs (watch this if you ever sell poster-adjacent merch)
+- **10 active document cap** (archive finished designs to work around it)
+- limited CAM (2/2.5-axis mill, turning, FFF print prep — fine for desktop machines)
+- community verdict: most hobbyists "will not even notice the limitations" (r/Fusion360)
+
+**If Fusion ever becomes unusable, ranked for our use:**
+1. **FreeCAD 1.1.x** — full parametric CAD, free forever, 100% offline, you own the files. Clunky UX moments, but 1.0/1.1 fixed the broken-dependency-tree era. Best plain-CAD fallback.
+2. **Plasticity** — one-time purchase, direct NURBS on Parasolid; the designer-friendly pick, sharpest rise of any CAD tool in 2025. Trial exports OBJ/STL only. Not parametric (no rollback) — great modelling, weaker re-editing.
+3. **Onshape free** — browser-based, excellent sketcher, but **all documents public** and online-only. Only for non-confidential work.
+- Dark horses: **Dune 3D** (new, unusually easy to learn), **SolidWorks Maker** (~$48/yr promo pricing seen).
+- Interchange format: **STEP**. Keep `60_cad/step-library/` app-independent so a switch never loses assets. .f3d carries nothing over.
 - Vault touchpoint: `60_cad/` (.f3d/.FCStd + STEP).
