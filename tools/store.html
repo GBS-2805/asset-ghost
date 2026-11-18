@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Asset Mine — vault store</title>
+<style>
+  :root{
+    --bg:#161618; --panel:#1e1e21; --card:#242428; --line:#333338;
+    --text:#ececef; --dim:#9a9aa2; --accent:#7cc4ff; --star:#e8c35a; --ok:#6fd08c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,sans-serif;display:flex;height:100vh}
+  aside{width:230px;min-width:190px;background:var(--panel);border-right:1px solid var(--line);padding:16px 12px;overflow-y:auto;flex-shrink:0}
+  aside h1{font-size:15px;margin-bottom:2px}
+  aside p.sub{color:var(--dim);font-size:11.5px;margin-bottom:14px}
+  aside h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:14px 4px 6px}
+  .cat{display:block;width:100%;text-align:left;background:none;border:0;color:var(--text);padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13.5px}
+  .cat:hover{background:#2b2b30}
+  .cat.active{background:var(--accent);color:#10202c;font-weight:600}
+  .cat .n{color:inherit;opacity:.55;font-size:11px;float:right;margin-top:2px}
+  main{flex:1;display:flex;flex-direction:column;min-width:0}
+  header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--panel)}
+  header input[type=search]{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--text);font-size:14px}
+  header input[type=search]:focus{outline:1px solid var(--accent)}
+  select{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;color:var(--text);font-size:13px}
+  #status{padding:10px 18px;color:var(--dim);font-size:13px}
+  #status.err{color:#ff9d9d}
+  #grid{padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;overflow-y:auto;flex:1;align-content:start}
+  .store-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+  .store-card:hover{border-color:var(--accent)}
+  .store-card a.name{color:var(--accent);font-weight:600;font-size:14.5px;text-decoration:none;word-break:break-word}
+  .store-card a.name:hover{text-decoration:underline}
+  .store-card .desc{color:var(--dim);font-size:12.5px;flex:1}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11.5px}
+  .pill{background:#2c2c31;border-radius:20px;padding:2px 9px;color:var(--text)}
+  .pill.star{color:var(--star)}
+  .pill.lic{color:var(--ok)}
+  .pill.none-lic{color:#ff9d9d}
+  footer{padding:8px 18px;border-top:1px solid var(--line);color:var(--dim);font-size:11.5px}
+  @media(max-width:700px){body{flex-direction:column}aside{width:100%;max-height:38vh;border-right:0;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<aside>
+  <h1>⛏️ GitHub Mines</h1>
+  <p class="sub">live results → your vault shelves</p>
+  <h2>Vault shelves</h2>
+  <nav id="catlist"></nav>
+  <h2>Explore</h2>
+  <nav id="xtralist"></nav>
+</aside>
+<main>
+  <header>
+    <input type="search" id="q" placeholder="Custom GitHub search… (e.g. iso grid textures)">
+    <select id="sort">
+      <option value="stars">★ most stars</option>
+      <option value="updated">🕘 recently updated</option>
+      <option value="best">✨ best match</option>
+    </select>
+  </header>
+  <div id="status">Pick a category or type a search.</div>
+  <div id="grid"></div>
+  <footer>Unauthenticated GitHub API: ~10 searches/min — if it complains, wait a minute. License pills: green = has license, red = none (vault rule: no license → don't take). <b>Never</b> paste a token into this file.</footer>
+</main>
+<script>
+const CATEGORIES = [
+  {group:"catlist", label:"🔤 Fonts / 10_fonts",        q:"font family OFL stars:>300"},
+  {group:"catlist", label:"🖼️ Illustrations",           q:"illustration pack svg stars:>500"},
+  {group:"catlist", label:"🧩 Icons",                    q:"icon set svg stars:>100 pushed:>2025-01-01"},
+  {group:"catlist", label:"🎨 Textures / CC0",           q:"cc0 textures stars:>100"},
+  {group:"catlist", label:"🌿 HDRI",                     q:"hdri stars:>100"},
+  {group:"catlist", label:"✏️ Blender add-ons",          q:"blender addon stars:>100 pushed:>2025-01-01"},
+  {group:"catlist", label:"🖌️ Blender brushes/assets",   q:"blender asset library brushes stars:>100"},
+  {group:"catlist", label:"📐 CAD part libraries",       q:"cad part library stars:>100"},
+  {group:"catlist", label:"🖨️ STL collections",          q:"stl library stars:>200"},
+  {group:"catlist", label:"🎬 Poster tools",             q:"poster generator design stars:>100"},
+  {group:"xtralist", label:"🔥 Trending this week",      q:"created:>2026-01-01 stars:>50", sort:"best"},
+  {group:"xtralist", label:"📦 Awesome design lists",    q:"awesome design stars:>500"},
+];
+const grid = document.getElementById("grid"), statusEl = document.getElementById("status");
+let activeBtn = null;
+
+const esc = s => (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function fetchRepos(query, sort){
+  const url = "https://api.github.com/search/repositories?per_page=24" +
+    (sort && sort!=="best" ? "&sort=" + sort : "") + "&q=" + encodeURIComponent(query);
+  const res = await fetch(url);
+  if(res.status===403 || res.status===429) throw new Error("GitHub rate limit hit (10 searches/min unauthenticated). Wait ~60s.");
+  if(!res.ok) throw new Error("GitHub API error " + res.status);
+  return (await res.json()).items || [];
+}
+
+function render(repos){
+  grid.innerHTML = repos.map(r => `
+    <div class="store-card">
+      <a class="name" href="${r.html_url}" target="_blank" rel="noopener">${esc(r.full_name)}</a>
+      <div class="desc">${esc(r.description || "— no description —")}</div>
+      <div class="meta">
+        <span class="pill star">★ ${r.stargazers_count.toLocaleString()}</span>
+        ${r.language ? `<span class="pill">${esc(r.language)}</span>` : ""}
+        ${r.license && r.license.spdx_id && r.license.spdx_id!=="NOASSERTION"
+          ? `<span class="pill lic">⚖ ${esc(r.license.spdx_id)}</span>`
+          : `<span class="pill none-lic">⚖ no license</span>`}
+        <span class="pill">${new Date(r.pushed_at).toISOString().slice(0,10)}</span>
+      </div>
+    </div>`).join("");
+}
+
+async function run(query, sort, label){
+  statusEl.className=""; statusEl.textContent = "Fetching: " + label + " …";
+  grid.innerHTML = "";
+  try{
+    const repos = await fetchRepos(query, sort);
+    statusEl.textContent = label + " — " + repos.length + " repos. Click any card to open the repo; remember the LICENSE check before it enters the vault.";
+    if(!repos.length) statusEl.textContent = label + " — nothing found. Try loosening the star filter.";
+    render(repos);
+  }catch(e){
+    statusEl.className="err"; statusEl.textContent = e.message;
+  }
+}
+
+function buildButtons(){
+  const lists = {};
+  CATEGORIES.forEach(c => (lists[c.group] = lists[c.group]||[]).push(c));
+  for(const [id, cats] of Object.entries(lists)){
+    const nav = document.getElementById(id);
+    cats.forEach(c => {
+      const b = document.createElement("button");
+      b.className = "cat"; b.textContent = c.label;
+      b.onclick = () => {
+        if(activeBtn) activeBtn.classList.remove("active");
+        b.classList.add("active"); activeBtn = b;
+        document.getElementById("q").value = "";
+        run(c.q, c.sort || document.getElementById("sort").value, c.label.replace(/^[^ ]+ /,""));
+      };
+      nav.appendChild(b);
+    });
+  }
+}
+
+document.getElementById("q").addEventListener("keydown", e => {
+  if(e.key==="Enter" && e.target.value.trim()){
+    if(activeBtn) activeBtn.classList.remove("active");
+    activeBtn = null;
+    run(e.target.value.trim(), document.getElementById("sort").value, "(" + e.target.value.trim() + ")");
+  }
+});
+document.getElementById("sort").addEventListener("change", () => {
+  if(activeBtn) activeBtn.click();
+});
+
+buildButtons();
+</script>
+</body>
+</html>
