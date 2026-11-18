@@ -4,7 +4,9 @@ Grouped by what feeds each app. Cross-app entries listed once under feeding prim
 Rules unchanged: license-first (`LICENSES.md`), one format, one copy.
 
 ## Billfish (the vault's visual layer)
-- [Billfish](https://billfish.cn/) — free asset manager (Win/Mac); library points at this vault's folders; exclude 80_private. Note: billfish.org is a fishing-conservation charity, NOT the app
+- [Billfish](https://billfish.cn/) — free asset manager (Win/Mac); library points at this vault's folders; exclude 80_private. **English UI: yes** (EN + 中文 toggle; the clipper's store listing lists both) — translation is imperfect but serviceable. Note: billfish.org is a fishing-conservation charity, NOT the app
+- [TagStudio](https://github.com/TagStudioDev/TagStudio) — open-source tag organizer, active (7k+ stars) but alpha — the FOSS one to watch
+- Allusion (allusion-app/Allusion) — FOSS but effectively abandoned since Feb 2023 (RAM leaks, no releases) — avoid
 - [Eagle](https://eagle.cool/) — the polished paid alternative ($34.95 one-time, 2 devices, lifetime updates, 30-day trial) — reads the same folders, swaps in later with zero migration
 
 ## Figma (UI / app / web)
