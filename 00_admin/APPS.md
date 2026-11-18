@@ -4,6 +4,8 @@
 One job per app; files travel via SVG/OTF/PNG/STEP/blend.
 
 ## Billfish — the vault's face
+- **Free** (Win/Mac), lives at billfish.cn. Rougher edges than Eagle (CN-first localization, slower polish) but 85% of the value at $0.
+- **Upgrade path — Eagle** (eagle.cool): $34.95 ONE-TIME, 2 devices (any mix of macOS/Windows), lifetime free updates, 30-day full trial. Educational discount was discontinued May 2026, so no student price. If Eagle's polish makes you file daily instead of weekly-begrudgingly, it's the best value-per-dollar buy in this whole stack. Either app reads the same folders, so zero switching cost later.
 - Point its library at the vault's numbered folders; it indexes (no duplication) and adds thumbnails, tags, color search, drag-drop filing, browser clipper.
 - Filing through Billfish = filing into the vault folders. Same single copy of everything.
 - **Exclude `80_private/` and `01_inbox/` from its library scope** — secrets and unsorted stuff stay out of visual browsing.

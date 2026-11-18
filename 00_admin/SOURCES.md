@@ -4,7 +4,8 @@ Grouped by what feeds each app. Cross-app entries listed once under feeding prim
 Rules unchanged: license-first (`LICENSES.md`), one format, one copy.
 
 ## Billfish (the vault's visual layer)
-- [Billfish asset manager](https://billfish.cn/) — free asset manager (Win/Mac); library points at this vault's folders; exclude 80_private. Note: billfish.org is a fishing-conservation charity, NOT the app
+- [Billfish](https://billfish.cn/) — free asset manager (Win/Mac); library points at this vault's folders; exclude 80_private. Note: billfish.org is a fishing-conservation charity, NOT the app
+- [Eagle](https://eagle.cool/) — the polished paid alternative ($34.95 one-time, 2 devices, lifetime updates, 30-day trial) — reads the same folders, swaps in later with zero migration
 
 ## Figma (UI / app / web)
 - [Figma Community](https://figma.com/community) — free kits/templates; start every project here
