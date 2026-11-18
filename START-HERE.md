@@ -38,6 +38,17 @@ They export as .svg → `20_vector/icons/iconify_whatitshows_open.svg` → one l
 **"Plasticity emailed me a license token."**
 Copy it into `80_private/plasticity-academic_token.txt` AND into your password manager as a secure note. Keep the installer in `80_private/` too. Never commit, never paste into chats.
 
+## Do this once, in the first week: install Billfish (free)
+
+Billfish is a free app (Windows/Mac) that puts a visual browser on top of this folder — thumbnails, search, tags, drag-drop filing, browser clipper. It doesn't copy or move anything: it looks at these same folders.
+
+1. Download from billfish.org → install → create a library.
+2. Point it at the vault's folders — **add 10–70 folders, NEVER `80_private/`** (secrets) or `01_inbox/` (unsorted junk doesn't need thumbnails).
+3. From then on: download → drag into Billfish → it lands in the right vault folder with a thumbnail. The "manual" part mostly disappears.
+4. Figma/Illustrator/Blender/Plasticity never see the difference — folders unchanged.
+
+And if Billfish ever gets discontinued: folders are still exactly as organized as before. Nothing to migrate.
+
 ## The weekly cleanup (2 minutes, once a week)
 
 1. Open `01_inbox/`.

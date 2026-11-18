@@ -1,6 +1,13 @@
 # Apps — final loadout (4)
 
-**Figma · Illustrator · Plasticity · Blender.** One job per app; files travel via SVG/OTF/PNG/STEP/blend.
+**Figma · Illustrator · Plasticity · Blender**, plus **Billfish** as the visual layer over the vault (free, Win+Mac).
+One job per app; files travel via SVG/OTF/PNG/STEP/blend.
+
+## Billfish — the vault's face
+- Point its library at the vault's numbered folders; it indexes (no duplication) and adds thumbnails, tags, color search, drag-drop filing, browser clipper.
+- Filing through Billfish = filing into the vault folders. Same single copy of everything.
+- **Exclude `80_private/` and `01_inbox/` from its library scope** — secrets and unsorted stuff stay out of visual browsing.
+- Setup notes in `START-HERE.md`. If Billfish ever dies: folders remain untouched, nothing to migrate.
 
 ## Figma — UI & app/web design
 - Cloud library is the database: kits, components, styles, plugins stay in Figma.
