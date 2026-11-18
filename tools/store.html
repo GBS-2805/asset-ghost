@@ -65,18 +65,18 @@
 </main>
 <script>
 const CATEGORIES = [
-  {group:"catlist", label:"🔤 Fonts / 10_fonts",        q:"font family OFL stars:>300"},
-  {group:"catlist", label:"🖼️ Illustrations",           q:"illustration pack svg stars:>500"},
-  {group:"catlist", label:"🧩 Icons",                    q:"icon set svg stars:>100 pushed:>2025-01-01"},
-  {group:"catlist", label:"🎨 Textures / CC0",           q:"cc0 textures stars:>100"},
-  {group:"catlist", label:"🌿 HDRI",                     q:"hdri stars:>100"},
-  {group:"catlist", label:"✏️ Blender add-ons",          q:"blender addon stars:>100 pushed:>2025-01-01"},
-  {group:"catlist", label:"🖌️ Blender brushes/assets",   q:"blender asset library brushes stars:>100"},
-  {group:"catlist", label:"📐 CAD part libraries",       q:"cad part library stars:>100"},
-  {group:"catlist", label:"🖨️ STL collections",          q:"stl library stars:>200"},
-  {group:"catlist", label:"🎬 Poster tools",             q:"poster generator design stars:>100"},
-  {group:"xtralist", label:"🔥 Trending this week",      q:"created:>2026-01-01 stars:>50", sort:"best"},
-  {group:"xtralist", label:"📦 Awesome design lists",    q:"awesome design stars:>500"},
+  {group:"catlist", label:"🔤 Fonts / 10_fonts",      q:"topic:font stars:>300"},
+  {group:"catlist", label:"🖼️ Illustrations",   q:"topic:illustration stars:>100"},
+  {group:"catlist", label:"🧩 Icons",                q:"topic:icons stars:>200"},
+  {group:"catlist", label:"🎨 Textures / CC0",        q:"topic:textures stars:>50"},
+  {group:"catlist", label:"🌿 HDRI",                 q:"topic:hdri"},
+  {group:"catlist", label:"✏️ Blender add-ons",     q:"topic:blender-addon stars:>10"},
+  {group:"catlist", label:"🖌️ Blender assets",   q:"topic:blender asset stars:>10"},
+  {group:"catlist", label:"📐 CAD",                  q:"topic:cad stars:>100"},
+  {group:"catlist", label:"🖨️ STL / 3D-print",  q:"topic:3d-printing stars:>200"},
+  {group:"catlist", label:"🎬 Poster tools",          q:"topic:poster"},
+  {group:"xtralist", label:"🔥 Trending this week",  q:"created:>2026-01-01 stars:>50", sort:"best"},
+  {group:"xtralist", label:"📦 Design lists & resources", q:"design resources stars:>500"},
 ];
 const grid = document.getElementById("grid"), statusEl = document.getElementById("status");
 let activeBtn = null;
