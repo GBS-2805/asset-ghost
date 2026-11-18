@@ -1,0 +1,10 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Don't track heavy binaries that can be re-downloaded (log them in SOURCES.md instead)
+01_inbox/*
+50_blender/addons/*
+*.exr
+*.hdr
+!50_blender/hdri/.gitkeep
