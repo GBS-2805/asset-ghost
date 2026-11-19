@@ -41,11 +41,6 @@
 - [Mockup World](https://www.mockupworld.co/) — big free mockup directory (device/poster/apparel)
 - [Unblast](https://unblast.com/) — free mockups + UI kits
 - [LS Graphics](https://ls.graphics/free-mockups) — pro mockups, free section
-- [ambientCG](https://ambientcg.com/) — CC0 textures incl. grunge/scratch/imperfection overlays
-- [Poly Haven textures](https://polyhaven.com/textures) — CC0, seamless
-- [Rijksstudio (Rijksmuseum)](https://www.rijksmuseum.nl/en/rijksstudio) — 800k+ artworks, most free high-res — vintage poster reference heaven
-- [Smithsonian Open Access](https://www.si.edu/openaccess) + [their 3D scans](https://3d.si.edu/explore) — millions of images AND printable/downloadable 3D scans
-- [NYPL Digital Collections](https://digitalcollections.nypl.org/) — free vintage illustrations/posters with reuse labels
 
 *Overlays: search "grunge / dust / scratch overlay PSD" on those sites — multiply-blend them in Illustrator (via raster) or map as textures in Blender.*
 
@@ -89,3 +84,14 @@
 ---
 
 **About "cloning":** files can't leave my sandbox to your PC — but the links above download straight from GitHub to your Downloads folder. Clone in git terms means copying history; Download ZIP is what you actually want.
+---
+
+## 🏛 REFERENCE ARCHIVES — museum-grade, free
+
+| Site | Get it | Best for |
+|---|---|---|
+| **Smithsonian Open Access** — 5.2M+ items, CC0 | [main portal](https://www.si.edu/openaccess) · [2D search](https://collections.si.edu) · [3D scans](https://3d.si.edu/explore) | Apollo module, Wright Flyer, Bell X-1, life masks, dinos — print or Plasticity-trace |
+| **Rijksstudio** (Rijksmuseum) — 800k+ artworks | [rijksstudio](https://www.rijksmuseum.nl/en/rijksstudio) | high-res art → vintage poster reference heaven |
+| **NYPL Digital Collections** | [digitalcollections.nypl.org](https://digitalcollections.nypl.org/) | free vintage illustrations/posters, reuse labels |
+| **Poly Haven** — CC0 textures/HDRI/models | [polyhaven.com](https://polyhaven.com/) | Blender + Plasticity rendering |
+| **ambientCG** — CC0 materials/overlays | [ambientcg.com](https://ambientcg.com/) | grunge/scratch/imperfection overlays |
