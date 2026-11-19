@@ -1,61 +1,61 @@
-# 📦 GRAB-LIST — download right now from GitHub
+# 📦 GRAB-LIST — one-click downloads from GitHub
 
-Two ways to download anything on GitHub:
-
-1. **Release asset** — repo page → right sidebar **Releases** → click the `.zip`. One click, exact pack.
-2. **Download ZIP** — repo page → green **<> Code v** button → **Download ZIP**. Grabs the whole repo as a zip.
-
-Verified live (releases checked). Star what you use → back it up in ⭐ Favorites.
+**How to download:** click a **⬇ one-click** link below (or on any repo page: green `<> Code` ▾ → **Download ZIP**). No git, no account needed.
+**Repos browsed & verified live on Feb build.** Sizes marked where it matters — don't one-click anything marked HUGE.
 
 ---
 
-## 🎨 Blender
+## 🛠 PLASTICITY / CAD — eat first
 
-| What | Repo | How | Notes |
-|---|---|---|---|
-| **1,024 matcaps** (giant matcap library, instant materials) | [nidorx/matcaps](https://github.com/nidorx/matcaps) | Release → `1024.zip` | ⚖ check folder license |
-| Sculpt brush set (free, stylized) | [Rakurri/rakurri-brush-set-for-blender](https://github.com/Rakurri/rakurri-brush-set-for-blender) | Download ZIP (~65 MB) | brushes in repo folders |
-| CC0 texture dump (1,144 textures) | [PatrickJnr/cc0-texture-pack](https://github.com/PatrickJnr/cc0-texture-pack) | Download ZIP | CC0 — safe for everything |
-
-Add-ons: any repo zip from the store's "Blender add-ons" shelf → `Edit ▸ Preferences ▸ Add-ons ▸ Install` the zip directly (no unzipping needed).
-
-## 🛠 Plasticity / CAD
-
-| What | Repo | How | Notes |
-|---|---|---|---|
-| **KiCad official 3D library** — thousands of `.step` files | [KiCad/kicad-packages3D](https://github.com/KiCad/kicad-packages3D) | Download ZIP (BIG) or open subfolder → grab single `.step` | import STEP straight into Plasticity |
-
-## 🖌 Illustrator / vector
-
-| What | Repo | How | Notes |
-|---|---|---|---|
-| 100+ Gopher illustrations (SVG/PNG) | [MariaLetta/free-gophers-pack](https://github.com/MariaLetta/free-gophers-pack) | Download ZIP | ⚖ CC BY-NC — no commercial |
-| Mega doodles pack (hand-drawn vectors) | [MariaLetta/mega-doodles-pack](https://github.com/MariaLetta/mega-doodles-pack) | Download ZIP | SVG → open/edit in Illustrator |
-| 3,000+ OpenMoji emojis (outline+color SVG) | [openmoji/openmoji](https://github.com/openmoji/openmoji) | Download ZIP | CC BY-SA 4.0 |
-| Brand icons as SVG (technical drawings, logos) | [simple-icons/simple-icons](https://github.com/simple-icons/simple-icons) | Download ZIP | logo usage rules per brand |
-
-## 🧩 Figma
-
-| What | Repo | How | Notes |
-|---|---|---|---|
-| Carbon design kit — real `.fig` library (IBM) | [carbon-design-system/carbon-design-kit](https://github.com/carbon-design-system/carbon-design-kit) | Download ZIP → open `.fig` | beginner-friendly UI kit |
-
-## 🔤 Fonts (OFL — modifiable & redistributable)
-
-| What | Repo | How |
+| What | Get it | Notes |
 |---|---|---|
-| Inter (the UI font) | [rsms/inter](https://github.com/rsms/inter) | Release → `Inter-4.1.zip` |
-| JetBrains Mono (coding font) | [JetBrains/JetBrainsMono](https://github.com/JetBrains/JetBrainsMono) | Release → zip |
-| Noto Emoji (mono emoji font, incl. 3D) | [googlefonts/noto-emoji](https://github.com/googlefonts/noto-emoji) | Release → zip |
+| **Keychron hardware design files** — 100+ keyboard/mice models (`.stp`, `.dxf`, `DWG`) | [Repo](https://github.com/Keychron/Keychron-Keyboards-Hardware-Design) → open any keyboard folder → README → direct `.stp` links | real professional industrial CAD, perfect Plasticity practice/reference. Not in the zip — links point at Keychron's server |
+| **KiCad official 3D library** — thousands of STEP parts | [⬇ one-click ZIP (1.2 GB)](https://github.com/KiCad/kicad-packages3D/archive/refs/heads/master.zip) — or browse [Folders](https://github.com/KiCad/kicad-packages3D) and grab single `.step` | connectors, components, enclosures — massive STEP sandbox |
+| **FreeCAD parts library** — bolts, gears, electronics, furniture, architectural pieces | [⬇ one-click ZIP](https://github.com/FreeCAD/FreeCAD-library/archive/refs/heads/master.zip) | mixed formats; STEP/FCStd — useful man-made parts for hard-surface scenes |
 
-## 🧢 Icons (multi-app, import as SVG into Illustrator/Figma)
+## 📸 MOCKUPS / OVERLAYS / GRUNGE — poster ammo
 
-| What | Repo | How | Notes |
-|---|---|---|---|
-| Lucide — 1,500+ stroke icons | [lucide-icons/lucide](https://github.com/lucide-icons/lucide) | Release → `lucide-icons-*.zip` | ISC — do anything |
-| Tabler — 5,000+ icons | [tabler/tabler-icons](https://github.com/tabler/tabler-icons) | Download ZIP | MIT |
+| What | Get it | Notes |
+|---|---|---|
+| **Subtle Patterns** — 480+ seamless tileable textures (paper, noise, grit, fabric) | [⬇ one-click ZIP](https://github.com/atlemo/SubtlePatterns/archive/refs/heads/gh-pages.zip) | overlay on multiply, or map into Blender. The classic design-industry pattern vault |
+| **CC0 texture dump** — 1,144 photo textures | ⚠ HUGE (9 GB) — [browse folders](https://github.com/PatrickJnr/cc0-texture-pack) and cherry-pick, don't one-click | CC0 — safe commercially |
+| Bonus live source: the store's **Textures · Patterns/wallpapers** shelf | [store](https://gbs-2805.github.io/asset-ghost/) | topic:wallpaper + topic:patterns searches |
+
+*PSD smart mockups specifically (device frames etc.) mostly live **off** GitHub — grab from mockups-world-type sites; GitHub's strength is vector/textures/CAD.*
+
+## 🎨 BLENDER (light, as requested)
+
+| What | Get it | Notes |
+|---|---|---|
+| **1,024 matcaps** — instant materials | [⬇ one-click `1024.zip`](https://github.com/nidorx/matcaps/releases/download/v1.0/1024.zip) | drag the folder into Blender's matcap prefs |
+| Sculpt brush set | [⬇ one-click ZIP (65 MB)](https://github.com/Rakurri/rakurri-brush-set-for-blender/archive/refs/heads/main.zip) | free stylized brushes |
+
+## 🧩 FIGMA
+
+| What | Get it | Notes |
+|---|---|---|
+| **Carbon Design Kit** — complete `.fig` UI library (IBM, Apache license) | [⬇ one-click ZIP (400 MB)](https://github.com/carbon-design-system/carbon-design-kit/archive/refs/heads/master.zip) | unzip → open the `.fig` in Figma. Educational gold |
+
+## 🖌 VECTOR (opens clean in Illustrator)
+
+| What | Get it | Notes |
+|---|---|---|
+| Brand logos as SVG (technical original outlines) | [⬇ one-click ZIP (69 MB)](https://github.com/simple-icons/simple-icons/archive/refs/heads/develop.zip) | logo usage rules per brand |
+
+## 🔤 FONTS (OFL — modifiable, redistributable)
+
+| What | Get it |
+|---|---|
+| Inter (the UI font) | [⬇ one-click zip](https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip) |
+| JetBrains Mono | [⬇ one-click zip](https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip) |
+
+## 🧢 ICONS
+
+| What | Get it | Notes |
+|---|---|---|
+| Lucide — 1,500+ stroke icons | [⬇ one-click icons zip](https://github.com/lucide-icons/lucide/releases/download/1.75.0/lucide-icons-1.75.0.zip) | ISC — do anything |
+| Tabler — 5,000+ icons | ⚠ repo is 1 GB — [browse SVG folders](https://github.com/tabler/tabler-icons/tree/main/icons) instead | MIT |
 
 ---
 
-*License ⚖ = check before selling/attacking commercial work. OFL fonts and ISC/MIT icons are the safest.*
-*Backup this list's favorites: star in the store → Export → tools/favorites.json → say "back up favorites".*
+**About "cloning":** files can't leave my sandbox to your PC — but the links above download straight from GitHub to your Downloads folder. Clone in git terms means copying history; Download ZIP is what you actually want.
