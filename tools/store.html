@@ -32,7 +32,11 @@
   #status.err{color:#ff9d9d}
   #status .budget{color:var(--accent)}
   #grid{padding:14px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;overflow-y:auto;flex:1;align-content:start}
-  .store-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+  .store-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+  .fav{position:absolute;top:22px;right:22px;z-index:2;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:rgba(22,22,24,.85);color:var(--dim);font-size:15px;cursor:pointer;line-height:1}
+  .fav:hover{color:var(--text);border-color:var(--accent)}
+  .fav.on{color:var(--star);border-color:var(--star)}
+  #favtab{margin-bottom:4px}
   .store-card:hover{border-color:var(--accent)}
   .thumb-wrap{display:block;margin:-14px -14px 8px;overflow:hidden;background:#111113}
   .thumb{display:block;width:100%;height:130px;object-fit:cover;object-position:center 20%}
@@ -55,6 +59,7 @@
 <aside>
   <h1>⛏️ GitHub Mines</h1>
   <p class="sub">live results → your vault shelves</p>
+  <button id="favtab" class="cat">⭐ Favorites <span class="n" id="favcount"></span></button>
   <h2>Vault shelves</h2>
   <nav id="catlist"></nav>
   <h2>Explore</h2>
@@ -125,6 +130,7 @@ const grid = document.getElementById("grid"), statusEl = document.getElementById
       budgetEl = document.getElementById("budget"), subbar = document.getElementById("subbar"),
       moreBtn = document.getElementById("more");
 let activeBtn = null, activeChip = null;
+let lastItems = [];
 let state = {q:null, sort:"stars", page:1, total:0};
 
 const esc = s => (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -204,9 +210,41 @@ async function upgradeThumb(r){
   }
 }
 
+let FAVS = (() => { try{ return JSON.parse(localStorage.getItem("gh_favs") || "{}"); }catch(e){ return {}; } })();
+let favOpen = false;
+function saveFavs(){ try{ localStorage.setItem("gh_favs", JSON.stringify(FAVS)); }catch(e){} }
+function updateFavCount(){
+  const n = Object.keys(FAVS).length;
+  document.getElementById("favcount").textContent = n ? "(" + n + ")" : "";
+}
+function toggleFav(fullName, btn, repoObj){
+  if(FAVS[fullName]){
+    delete FAVS[fullName];
+    if(btn) btn.classList.remove("on");
+  }else{
+    FAVS[fullName] = {saved: Date.now(), repo: repoObj || null};
+    if(btn) btn.classList.add("on");
+  }
+  saveFavs();
+  updateFavCount();
+  if(favOpen) renderFavs();
+}
+function renderFavs(){
+  const items = Object.entries(FAVS)
+    .sort((a, b) => b[1].saved - a[1].saved)
+    .map(([name, entry]) => ({full_name: name, html_url: "https://github.com/" + name,
+                              stargazers_count: 0, ...(entry.repo || {})}));
+  if(!items.length) statusEl.textContent = "No favorites yet — hit the ★ on any card in any category.";
+  render(items, false);
+  moreBtn.hidden = true;
+  if(items.length) statusEl.textContent = "Your " + items.length + " saved repos — click ★ to remove. Saved in this browser (no account).";
+}
+
 function render(repos, append){
+  lastItems = repos.slice();
   const html = repos.map(r => `
     <div class="store-card">
+      <button class="fav${FAVS[r.full_name] ? " on" : ""}" data-fav="${esc(r.full_name)}" title="Save to favorites">★</button>
       <a class="thumb-wrap" href="${r.html_url}" target="_blank" rel="noopener">
         <img class="thumb" loading="lazy" referrerpolicy="no-referrer" alt="" src="${OG(r)}" data-repo="${esc(r.full_name)}">
       </a>
@@ -218,7 +256,7 @@ function render(repos, append){
         ${r.license && r.license.spdx_id && r.license.spdx_id !== "NOASSERTION"
           ? `<span class="pill lic">⚖ ${esc(r.license.spdx_id)}</span>`
           : `<span class="pill none-lic">⚖ no license</span>`}
-        <span class="pill">${new Date(r.pushed_at).toISOString().slice(0,10)}</span>
+        ${r.pushed_at ? `<span class="pill">${new Date(r.pushed_at).toISOString().slice(0,10)}</span>` : ""}
       </div>
     </div>`).join("");
   if(append) grid.insertAdjacentHTML("beforeend", html); else grid.innerHTML = html;
@@ -263,6 +301,8 @@ async function load(){
 }
 
 function run(q, sort, label, keepSubs){
+  favOpen = false;
+  document.getElementById("favtab").classList.remove("active");
   statusEl.className = "";
   statusEl.textContent = "Fetching …";
   if(!keepSubs) grid.innerHTML = "";
@@ -278,6 +318,26 @@ function pickCategory(cat, btn){
   setSubs(cat);
   run(cat.q, cat.sort || document.getElementById("sort").value, cat.label.replace(/^[^ ]+ /, ""));
 }
+
+document.getElementById("favtab").addEventListener("click", e => {
+  e.currentTarget.classList.add("active");
+  if(activeBtn){ activeBtn.classList.remove("active"); activeBtn = null; }
+  favOpen = true;
+  subbar.innerHTML = "";
+  document.getElementById("q").value = "";
+  statusEl.className = "";
+  grid.innerHTML = "";
+  renderFavs();
+});
+
+grid.addEventListener("click", e => {
+  const btn = e.target.closest(".fav");
+  if(!btn) return;
+  e.preventDefault();
+  const name = btn.dataset.fav;
+  const repo = (lastItems || []).find(x => x.full_name === name) || null;
+  toggleFav(name, btn, repo);
+});
 
 function buildButtons(){
   const lists = {};
@@ -308,6 +368,7 @@ document.getElementById("sort").addEventListener("change", () => {
 moreBtn.addEventListener("click", () => { state.page += 1; load(); });
 
 buildButtons();
+updateFavCount();
 </script>
 </body>
 </html>
