@@ -37,6 +37,9 @@
   .fav:hover{color:var(--text);border-color:var(--accent)}
   .fav.on{color:var(--star);border-color:var(--star)}
   #favtab{margin-bottom:4px}
+  #favops{display:flex;gap:6px;margin-bottom:8px}
+  #favops button{flex:1;background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:8px;padding:6px 4px;font-size:11.5px;cursor:pointer}
+  #favops button:hover{color:var(--text);border-color:var(--accent)}
   .store-card:hover{border-color:var(--accent)}
   .thumb-wrap{display:block;margin:-14px -14px 8px;overflow:hidden;background:#111113}
   .thumb{display:block;width:100%;height:130px;object-fit:cover;object-position:center 20%}
@@ -60,6 +63,8 @@
   <h1>⛏️ GitHub Mines</h1>
   <p class="sub">live results → your vault shelves</p>
   <button id="favtab" class="cat">⭐ Favorites <span class="n" id="favcount"></span></button>
+  <div id="favops"><button id="favexp">⬇ Export</button><button id="favimp">⬆ Import</button></div>
+  <input type="file" id="favfile" accept="application/json,.json" hidden>
   <h2>Vault shelves</h2>
   <nav id="catlist"></nav>
   <h2>Explore</h2>
@@ -229,6 +234,41 @@ function toggleFav(fullName, btn, repoObj){
   updateFavCount();
   if(favOpen) renderFavs();
 }
+function mergeFavs(data){
+  let added = 0;
+  for(const [name, entry] of Object.entries(data.favorites || {})){
+    if(!FAVS[name]){ FAVS[name] = entry; added++; }
+  }
+  if(added){ saveFavs(); updateFavCount(); if(favOpen) renderFavs(); }
+  return added;
+}
+
+document.getElementById("favexp").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify({saved_at: new Date().toISOString(), favorites: FAVS}, null, 2)], {type: "application/json"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "favorites.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+  statusEl.className = "";
+  statusEl.textContent = "favorites.json downloaded. Drop it into tools/ in the repo (and push) to back it up forever — it auto-loads on every device.";
+});
+
+document.getElementById("favimp").addEventListener("click", () => document.getElementById("favfile").click());
+document.getElementById("favfile").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if(!file) return;
+  try{
+    const added = mergeFavs(JSON.parse(await file.text()));
+    statusEl.className = "";
+    statusEl.textContent = "Imported " + added + " new favorites (" + Object.keys(FAVS).length + " total). Import only adds — it never deletes.";
+  }catch(err){
+    statusEl.className = "err";
+    statusEl.textContent = "That file isn't a valid favorites export.";
+  }
+});
+
 function renderFavs(){
   const items = Object.entries(FAVS)
     .sort((a, b) => b[1].saved - a[1].saved)
@@ -369,6 +409,18 @@ moreBtn.addEventListener("click", () => { state.page += 1; load(); });
 
 buildButtons();
 updateFavCount();
+(async () => {
+  try{
+    const res = await fetch("favorites.json");
+    if(res.ok){
+      const added = mergeFavs(await res.json());
+      if(added){
+        statusEl.className = "";
+        statusEl.textContent = "Loaded " + added + " favorite(s) from your vault backup (tools/favorites.json).";
+      }
+    }
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
