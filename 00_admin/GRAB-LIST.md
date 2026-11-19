@@ -24,6 +24,8 @@
 | **TVA Tempad** — Loki/Deadpool replica prop | [⬇ one-click ZIP](https://github.com/NatGrayYes/TVA-Tempad/archive/refs/heads/main.zip) | cosplay-grade prop, prints flat + electronics optional |
 | **Printable terrain** — turn real mountains into STL | [TouchTerrain](https://github.com/ChHarding/TouchTerrain_for_CAGEO) (tool) | pairs perfectly with NASA data — print actual geology |
 
+| **dotSCAD parametric art** — math-made printable sculptures/objects | [browse examples](https://github.com/JustinSDK/dotSCAD/tree/master/examples) | 937★ — chrome dino, crystal clusters, art pieces that print well |
+
 > More printable objects live on Printables/Thingiverse/MakerWorld — GitHub's sweet spot is models with code/electronics attached and functional prints.
 
 ## 📸 MOCKUPS / OVERLAYS / GRUNGE — poster ammo
@@ -41,6 +43,9 @@
 - [LS Graphics](https://ls.graphics/free-mockups) — pro mockups, free section
 - [ambientCG](https://ambientcg.com/) — CC0 textures incl. grunge/scratch/imperfection overlays
 - [Poly Haven textures](https://polyhaven.com/textures) — CC0, seamless
+- [Rijksstudio (Rijksmuseum)](https://www.rijksmuseum.nl/en/rijksstudio) — 800k+ artworks, most free high-res — vintage poster reference heaven
+- [Smithsonian Open Access](https://www.si.edu/openaccess) + [their 3D scans](https://3d.si.edu/explore) — millions of images AND printable/downloadable 3D scans
+- [NYPL Digital Collections](https://digitalcollections.nypl.org/) — free vintage illustrations/posters with reuse labels
 
 *Overlays: search "grunge / dust / scratch overlay PSD" on those sites — multiply-blend them in Illustrator (via raster) or map as textures in Blender.*
 
@@ -49,6 +54,7 @@
 | What | Get it | Notes |
 |---|---|---|
 | **1,024 matcaps** — instant materials | [⬇ one-click `1024.zip`](https://github.com/nidorx/matcaps/releases/download/v1.0/1024.zip) | drag the folder into Blender's matcap prefs |
+| **Kenney assets, organized** — CC0 2D/3D/UI packs | [⬇ one-click ZIP](https://github.com/shorepine/kenney/archive/refs/heads/main.zip) | the beloved kenney.nl library in tidy folders · instant props/UI |
 | Sculpt brush set | [⬇ one-click ZIP (65 MB)](https://github.com/Rakurri/rakurri-brush-set-for-blender/archive/refs/heads/main.zip) | free stylized brushes |
 
 ## 🧩 FIGMA
@@ -61,14 +67,17 @@
 
 | What | Get it | Notes |
 |---|---|---|
+| **SuperTinyIcons** — 950+ crafted SVG brand icons (strict QC, <1KB each) | [⬇ one-click ZIP](https://github.com/edent/SuperTinyIcons/archive/refs/heads/master.zip) | 15k★ — insanely clean vector work
 | Brand logos as SVG (technical original outlines) | [⬇ one-click ZIP (69 MB)](https://github.com/simple-icons/simple-icons/archive/refs/heads/develop.zip) | logo usage rules per brand |
 
 ## 🔤 FONTS (OFL — modifiable, redistributable)
 
 | What | Get it |
 |---|---|
+| **Overused Grotesk** — Swiss-style variable font, made for posters | [⬇ one-click ZIP](https://github.com/RandomMaerks/Overused-Grotesk/archive/refs/heads/main.zip) | OFL · full Black→ExtraLight family · that neo-grotesk look|
 | Inter (the UI font) | [⬇ one-click zip](https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip) |
 | JetBrains Mono | [⬇ one-click zip](https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip) |
+| **Every Google Font** (all OFL) | ⚠ browse [google/fonts](https://github.com/google/fonts/tree/main/ofl) — 3 GB+ repo | Fraunces, Archivo,Bricolage — poster type waiting to happen |
 
 ## 🧢 ICONS
 
