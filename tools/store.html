@@ -11,6 +11,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,sans-serif;display:flex;height:100vh}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   aside{width:230px;min-width:190px;background:var(--panel);border-right:1px solid var(--line);padding:16px 12px;overflow-y:auto;flex-shrink:0}
   aside h1{font-size:15px;margin-bottom:2px}
   aside p.sub{color:var(--dim);font-size:11.5px;margin-bottom:14px}
@@ -20,29 +21,28 @@
   .cat.active{background:var(--accent);color:#10202c;font-weight:600}
   main{flex:1;display:flex;flex-direction:column;min-width:0}
   header{padding:12px 18px 8px;border-bottom:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--panel)}
-  header input[type=search]{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--text);font-size:14px}
+  header input[type=search]{flex:1;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--text);font-size:14px}
   header input[type=search]:focus{outline:1px solid var(--accent)}
   select{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;color:var(--text);font-size:13px}
+  .liconly{display:flex;align-items:center;gap:6px;color:var(--dim);font-size:12.5px;cursor:pointer;user-select:none}
+  .liconly input{accent-color:var(--ok);width:15px;height:15px;cursor:pointer}
   #subbar{padding:8px 18px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--panel)}
   #subbar:empty{display:none}
   .chip{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:20px;padding:4px 12px;font-size:12.5px;cursor:pointer}
   .chip:hover{border-color:var(--accent)}
   .chip.active{background:var(--accent);border-color:var(--accent);color:#10202c;font-weight:600}
-  #status{padding:8px 18px 4px;color:var(--dim);font-size:12.5px}
+  #status{padding:8px 18px 4px;color:var(--dim);font-size:12.5px;min-height:26px}
   #status.err{color:#ff9d9d}
   #status .budget{color:var(--accent)}
   #grid{padding:14px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;overflow-y:auto;flex:1;align-content:start}
   .store-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+  .store-card:hover{border-color:var(--accent)}
+  .thumb-wrap{display:block;margin:-14px -14px 8px;overflow:hidden;background:#111113}
+  .thumb{display:block;width:100%;height:130px;object-fit:cover;object-position:center 20%;transition:transform .25s ease}
+  .thumb-wrap:hover .thumb{transform:scale(1.05)}
   .fav{position:absolute;top:22px;right:22px;z-index:2;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:rgba(22,22,24,.85);color:var(--dim);font-size:15px;cursor:pointer;line-height:1}
   .fav:hover{color:var(--text);border-color:var(--accent)}
   .fav.on{color:var(--star);border-color:var(--star)}
-  #favtab{margin-bottom:4px}
-  #favops{display:flex;gap:6px;margin-bottom:8px}
-  #favops button{flex:1;background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:8px;padding:6px 4px;font-size:11.5px;cursor:pointer}
-  #favops button:hover{color:var(--text);border-color:var(--accent)}
-  .store-card:hover{border-color:var(--accent)}
-  .thumb-wrap{display:block;margin:-14px -14px 8px;overflow:hidden;background:#111113}
-  .thumb{display:block;width:100%;height:130px;object-fit:cover;object-position:center 20%}
   .store-card a.name{color:var(--accent);font-weight:600;font-size:14.5px;text-decoration:none;word-break:break-word}
   .store-card a.name:hover{text-decoration:underline}
   .store-card .desc{color:var(--dim);font-size:12.5px;flex:1}
@@ -51,6 +51,11 @@
   .pill.star{color:var(--star)}
   .pill.lic{color:var(--ok)}
   .pill.none-lic{color:#ff9d9d}
+  .skel-thumb{height:130px;margin:-14px -14px 8px;background:linear-gradient(100deg,#1d1d20 40%,#28282c 50%,#1d1d20 60%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+  .skel-line{height:11px;border-radius:6px;background:linear-gradient(100deg,#1d1d20 40%,#28282c 50%,#1d1d20 60%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+  .skel-line.w60{width:60%}
+  .skel-line.w80{width:80%}
+  @keyframes shimmer{to{background-position:-200% 0}}
   #morewrap{padding:0 18px 16px;display:flex;justify-content:center}
   #more{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 22px;font-size:14px;cursor:pointer}
   #more:hover{border-color:var(--accent);color:var(--accent)}
@@ -62,8 +67,8 @@
 <aside>
   <h1>⛏️ GitHub Mines</h1>
   <p class="sub">live results → your vault shelves</p>
-  <button id="favtab" class="cat">⭐ Favorites <span class="n" id="favcount"></span></button>
-  <div id="favops"><button id="favexp">⬇ Export</button><button id="favimp">⬆ Import</button></div>
+  <button id="favtab" class="cat" aria-label="Show favorites">⭐ Favorites <span class="n" id="favcount"></span></button>
+  <div id="favops"><button id="favexp" aria-label="Export favorites">⬇ Export</button><button id="favimp" aria-label="Import favorites">⬆ Import</button></div>
   <input type="file" id="favfile" accept="application/json,.json" hidden>
   <h2>Vault shelves</h2>
   <nav id="catlist"></nav>
@@ -73,7 +78,21 @@
 <main>
   <header>
     <input type="search" id="q" placeholder="Custom GitHub search… (e.g. iso grid textures)">
-    <select id="sort">
+    <select id="lic" aria-label="License filter">
+      <option value="">⚖ any license</option>
+      <option value="mit">MIT — do anything</option>
+      <option value="apache-2.0">Apache-2.0 — modify/distribute</option>
+      <option value="bsd-3-clause">BSD-3</option>
+      <option value="bsd-2-clause">BSD-2</option>
+      <option value="mpl-2.0">MPL-2.0</option>
+      <option value="lgpl-2.1">LGPL</option>
+      <option value="gpl-3.0">GPL-3.0 — share-alike</option>
+      <option value="ofl-1.1">OFL — fonts</option>
+    </select>
+    <label class="liconly" title="Hide repos whose license GitHub could not detect">
+      <input type="checkbox" id="liconly" checked> licenses only
+    </label>
+    <select id="sort" aria-label="Sort results">
       <option value="stars">★ most stars</option>
       <option value="updated">🕘 recently updated</option>
       <option value="best">✨ best match</option>
@@ -83,11 +102,12 @@
   <div id="status">Pick a category or type a search.</div>
   <div id="grid"></div>
   <div id="morewrap"><button id="more" hidden>Load 24 more ↓</button></div>
-  <footer>Unauthenticated GitHub API: ~10 fresh searches/min — repeat clicks are free (cache). Budget left this minute: <span class="budget" id="budget">—</span>. License pills: green = has license, red = none (vault rule: no license → don't take). Previews: first image from each repo's README, else GitHub's banner — if one fails, it falls back automatically. <b>Never</b> paste a token into this file.</footer>
+  <footer>Unauthenticated GitHub API: ~10 fresh searches/min — repeat clicks are free (cache). Budget left this minute: <span class="budget" id="budget">—</span>. Red ⚖ pill = GitHub couldn't auto-detect the license; open the repo and check before it enters the vault. "licenses only" hides those. Previews: first image from each repo's README, else GitHub's banner. <b>Never</b> paste a token into this file.</footer>
 </main>
 <script>
 const PER_PAGE = 24;
-const TTL_MS = 6 * 60 * 60 * 1000; // cached results live 6h; repeat clicks cost no API budget
+const TTL_MS = 6 * 60 * 60 * 1000;
+const CACHE_CAP = 60;
 
 const CATEGORIES = [
   {group:"catlist", label:"🔢 Fonts / 10_fonts",   q:"topic:font stars:>300", subs:[
@@ -133,10 +153,12 @@ const CATEGORIES = [
 
 const grid = document.getElementById("grid"), statusEl = document.getElementById("status"),
       budgetEl = document.getElementById("budget"), subbar = document.getElementById("subbar"),
-      moreBtn = document.getElementById("more");
-let activeBtn = null, activeChip = null;
+      moreBtn = document.getElementById("more"), licSel = document.getElementById("lic"),
+      liconly = document.getElementById("liconly");
+let activeBtn = null;
 let lastItems = [];
 let state = {q:null, sort:"stars", page:1, total:0};
+let reqId = 0;
 
 const esc = s => (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -148,7 +170,20 @@ function cacheGet(key){
   return null;
 }
 function cacheSet(key, data){
-  try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), ...data})); }catch(e){}
+  try{
+    const stamps = [];
+    for(let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if(k && k.indexOf("ghmine:") === 0){
+        try{ stamps.push([k, (JSON.parse(localStorage.getItem(k)) || {}).t || 0]); }catch(e){}
+      }
+    }
+    if(stamps.length + 1 > CACHE_CAP){
+      stamps.sort((a,b) => a[1] - b[1]);
+      for(let j = 0; j <= stamps.length - CACHE_CAP; j++) localStorage.removeItem(stamps[j][0]);
+    }
+    localStorage.setItem(key, JSON.stringify({t:Date.now(), ...data}));
+  }catch(e){}
 }
 
 async function apiFetch(query, sort, page){
@@ -200,7 +235,7 @@ async function upgradeThumb(r){
   const img = grid.querySelector('img[data-repo="' + CSS.escape(r.full_name) + '"]');
   if(!img) return;
   const og = img.src, full = r.full_name, branch = r.default_branch;
-  for(const name of ["README.md", "readme.md"]){
+  for(const name of ["README.md", "readme.md", "Readme.md", "README.markdown", "README.rst", "README.mdx"]){
     let text = "";
     try{
       const res = await fetch("https://raw.githubusercontent.com/" + full + "/" + branch + "/" + name);
@@ -273,7 +308,7 @@ function renderFavs(){
   const items = Object.entries(FAVS)
     .sort((a, b) => b[1].saved - a[1].saved)
     .map(([name, entry]) => ({full_name: name, html_url: "https://github.com/" + name,
-                              stargazers_count: 0, ...(entry.repo || {})}));
+                              ...(entry.repo || {})}));
   if(!items.length) statusEl.textContent = "No favorites yet — hit the ★ on any card in any category.";
   render(items, false);
   moreBtn.hidden = true;
@@ -284,14 +319,14 @@ function render(repos, append){
   lastItems = repos.slice();
   const html = repos.map(r => `
     <div class="store-card">
-      <button class="fav${FAVS[r.full_name] ? " on" : ""}" data-fav="${esc(r.full_name)}" title="Save to favorites">★</button>
+      <button class="fav${FAVS[r.full_name] ? " on" : ""}" data-fav="${esc(r.full_name)}" title="Save to favorites" aria-label="Toggle favorite for ${esc(r.full_name)}">★</button>
       <a class="thumb-wrap" href="${r.html_url}" target="_blank" rel="noopener">
         <img class="thumb" loading="lazy" referrerpolicy="no-referrer" alt="" src="${OG(r)}" data-repo="${esc(r.full_name)}">
       </a>
       <a class="name" href="${r.html_url}" target="_blank" rel="noopener">${esc(r.full_name)}</a>
       <div class="desc">${esc(r.description || "— no description —")}</div>
       <div class="meta">
-        <span class="pill star">★ ${r.stargazers_count.toLocaleString()}</span>
+        ${r.stargazers_count ? `<span class="pill star">★ ${r.stargazers_count.toLocaleString()}</span>` : ""}
         ${r.language ? `<span class="pill">${esc(r.language)}</span>` : ""}
         ${r.license && r.license.spdx_id && r.license.spdx_id !== "NOASSERTION"
           ? `<span class="pill lic">⚖ ${esc(r.license.spdx_id)}</span>`
@@ -303,8 +338,14 @@ function render(repos, append){
   repos.forEach(r => upgradeThumb(r));
 }
 
+function showSkeletons(){
+  grid.innerHTML = Array(8).fill(
+    '<div class="store-card"><div class="skel-thumb"></div><div class="skel-line w60"></div><div class="skel-line"></div><div class="skel-line w80"></div></div>'
+  ).join("");
+}
+
 function setSubs(cat){
-  subbar.innerHTML = ""; activeChip = null;
+  subbar.innerHTML = "";
   if(!cat || !cat.subs) return;
   const choices = [["All", cat.q], ...cat.subs];
   choices.forEach(([label, q], i) => {
@@ -312,42 +353,51 @@ function setSubs(cat){
     c.className = "chip" + (i === 0 ? " active" : "");
     c.textContent = label;
     c.onclick = () => {
-      const chips = subbar.querySelectorAll(".chip");
-      chips.forEach(x => x.classList.remove("active"));
+      subbar.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
       c.classList.add("active");
-      state.page = 1; state.q = q;
-      run(q, document.getElementById("sort").value, label, true);
+      run(q, document.getElementById("sort").value);
     };
     subbar.appendChild(c);
   });
 }
 
+function effectiveQuery(){
+  return state.q + (licSel.value ? " license:" + licSel.value : "");
+}
+
 async function load(){
   if(!state.q) return;
+  const my = ++reqId;
   const append = state.page > 1;
   statusEl.className = "";
   statusEl.textContent = (append ? "Loading more…" : "Fetching…");
+  if(!append) showSkeletons();
   try{
-    const {items, total} = await apiFetch(state.q, state.sort, state.page);
+    const {items, total} = await apiFetch(effectiveQuery(), state.sort, state.page);
+    if(my !== reqId) return;
     state.total = total;
-    render(items, append);
-    const shown = state.page * PER_PAGE;
-    statusEl.textContent = "Showing " + Math.min(shown, total) + " of " + total + " repos. ⚖ pill = license check before it enters the vault.";
+    const filtered = liconly.checked
+      ? items.filter(r => r.license && r.license.spdx_id && r.license.spdx_id !== "NOASSERTION")
+      : items;
+    render(filtered, append);
+    const shown = Math.min(state.page * PER_PAGE, total);
+    const licenseNote = liconly.checked ? " (license-filtered)" : "";
+    statusEl.textContent = "Showing " + (liconly.checked ? filtered.length + " of " + Math.min(PER_PAGE, items.length) : shown) +
+      " of " + total + " repos" + licenseNote + ". ⚖ pill = license check before it enters the vault.";
     moreBtn.hidden = shown >= total || !items.length;
   }catch(e){
+    if(my !== reqId) return;
     statusEl.className = "err";
     statusEl.textContent = e.message;
   }
 }
 
-function run(q, sort, label, keepSubs){
+function run(q, sort){
   favOpen = false;
   document.getElementById("favtab").classList.remove("active");
-  statusEl.className = "";
-  statusEl.textContent = "Fetching …";
-  if(!keepSubs) grid.innerHTML = "";
   moreBtn.hidden = true;
-  state = {q, sort, page: 1, total: 0};
+  state = {q, sort: sort || "stars", page: 1, total: 0};
+  if(hashQ() !== q) location.hash = q;
   load();
 }
 
@@ -356,7 +406,25 @@ function pickCategory(cat, btn){
   btn.classList.add("active"); activeBtn = btn;
   document.getElementById("q").value = "";
   setSubs(cat);
-  run(cat.q, cat.sort || document.getElementById("sort").value, cat.label.replace(/^[^ ]+ /, ""));
+  run(cat.q, cat.sort || document.getElementById("sort").value);
+}
+
+function buildButtons(){
+  const lists = {};
+  CATEGORIES.forEach(c => (lists[c.group] = lists[c.group] || []).push(c));
+  for(const [id, cats] of Object.entries(lists)){
+    const nav = document.getElementById(id);
+    cats.forEach(c => {
+      const b = document.createElement("button");
+      b.className = "cat"; b.textContent = c.label;
+      b.onclick = () => pickCategory(c, b);
+      nav.appendChild(b);
+    });
+  }
+}
+
+function hashQ(){
+  try{ return decodeURIComponent(location.hash.replace(/^#/, "")); }catch(e){ return ""; }
 }
 
 document.getElementById("favtab").addEventListener("click", e => {
@@ -379,31 +447,32 @@ grid.addEventListener("click", e => {
   toggleFav(name, btn, repo);
 });
 
-function buildButtons(){
-  const lists = {};
-  CATEGORIES.forEach(c => (lists[c.group] = lists[c.group] || []).push(c));
-  for(const [id, cats] of Object.entries(lists)){
-    const nav = document.getElementById(id);
-    cats.forEach(c => {
-      const b = document.createElement("button");
-      b.className = "cat"; b.textContent = c.label;
-      b.onclick = () => pickCategory(c, b);
-      nav.appendChild(b);
-    });
+window.addEventListener("hashchange", () => {
+  const q = hashQ();
+  if(q && q !== state.q){
+    if(activeBtn) activeBtn.classList.remove("active");
+    activeBtn = null;
+    subbar.innerHTML = "";
+    run(q, document.getElementById("sort").value);
   }
-}
+});
 
 document.getElementById("q").addEventListener("keydown", e => {
   if(e.key === "Enter" && e.target.value.trim()){
     if(activeBtn) activeBtn.classList.remove("active");
     activeBtn = null;
     subbar.innerHTML = "";
-    run(e.target.value.trim(), document.getElementById("sort").value, "", false);
+    run(e.target.value.trim(), document.getElementById("sort").value);
   }
 });
 document.getElementById("sort").addEventListener("change", () => {
-  if(state.q) run(state.q, document.getElementById("sort").value, "", true);
-  else if(activeBtn){ const b = activeBtn; b.click(); }
+  if(!favOpen && state.q) run(state.q, document.getElementById("sort").value);
+});
+licSel.addEventListener("change", () => {
+  if(!favOpen && state.q) run(state.q, document.getElementById("sort").value);
+});
+liconly.addEventListener("change", () => {
+  if(!favOpen && state.q) load();
 });
 moreBtn.addEventListener("click", () => { state.page += 1; load(); });
 
@@ -421,6 +490,14 @@ updateFavCount();
     }
   }catch(e){}
 })();
+const start = hashQ();
+if(start){
+  favOpen = false;
+  state = {q: start, sort: document.getElementById("sort").value, page: 1, total: 0};
+  load();
+}else{
+  document.querySelector("#catlist .cat").click();
+}
 </script>
 </body>
 </html>
