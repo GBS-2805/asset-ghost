@@ -109,9 +109,12 @@
   #navback{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:60}
 
   @media(max-width:700px){
+    html{overflow-y:auto}
     body{display:block;height:auto;min-height:100dvh}
     main{display:block}
-    #grid{overflow:visible}
+    *{touch-action:auto}
+    #grid{overflow:visible;overscroll-behavior:auto}
+    .thumb{will-change:auto}
     #shelfbtn{display:inline-flex;align-items:center;gap:6px}
     aside{position:fixed;top:0;bottom:0;left:0;width:min(272px,82vw);max-height:none;z-index:70;transform:translateX(-105%);transition:transform .18s ease-out;box-shadow:8px 0 28px rgba(0,0,0,.35)}
     body.nav-open aside{transform:none}
