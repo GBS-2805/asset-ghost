@@ -22,7 +22,6 @@
 | **Robot duck** — printable biped walker | [⬇ one-click ZIP](https://github.com/LuwuDynamics/xgoduck_hardware/archive/refs/heads/master.zip) — 102 files | 2k★, builds into a walking robot |
 | **Gridfinity extended** — the legendary modular storage bins | [⬇ one-click ZIP](https://github.com/ostat/gridfinity_extended_openscad/archive/refs/heads/main.zip) | print an organized drawer system for EVERYTHING |
 | **TVA Tempad** — Loki/Deadpool replica prop | [⬇ one-click ZIP](https://github.com/NatGrayYes/TVA-Tempad/archive/refs/heads/main.zip) | cosplay-grade prop, prints flat + electronics optional |
-| **Helldivers Stratagem Tacpad** — game replica | [⬇ one-click ZIP](https://github.com/gromprops/Helldivers-2-Stratagem-Tacpad/archive/refs/heads/main.zip) | with working screen firmware |
 | **Printable terrain** — turn real mountains into STL | [TouchTerrain](https://github.com/ChHarding/TouchTerrain_for_CAGEO) (tool) | pairs perfectly with NASA data — print actual geology |
 
 > More printable objects live on Printables/Thingiverse/MakerWorld — GitHub's sweet spot is models with code/electronics attached and functional prints.
@@ -31,11 +30,19 @@
 
 | What | Get it | Notes |
 |---|---|---|
-| **Subtle Patterns** — 480+ seamless tileable textures (paper, noise, grit, fabric) | [⬇ one-click ZIP](https://github.com/atlemo/SubtlePatterns/archive/refs/heads/gh-pages.zip) | overlay on multiply, or map into Blender. The classic design-industry pattern vault |
 | **CC0 texture dump** — 1,144 photo textures | ⚠ HUGE (9 GB) — [browse folders](https://github.com/PatrickJnr/cc0-texture-pack) and cherry-pick, don't one-click | CC0 — safe commercially |
 | Bonus live source: the store's **Textures · Patterns/wallpapers** shelf | [store](https://gbs-2805.github.io/asset-ghost/) | topic:wallpaper + topic:patterns searches |
 
-*PSD smart mockups specifically (device frames etc.) mostly live **off** GitHub — grab from mockups-world-type sites; GitHub's strength is vector/textures/CAD.*
+*Straight talk — PSD mockups & grunge overlay packs live off GitHub. The good free ones:*
+
+- [mockups-design.com](https://mockups-design.com/) — 100% free PSD mockups, no account
+- [Mockup World](https://www.mockupworld.co/) — big free mockup directory (device/poster/apparel)
+- [Unblast](https://unblast.com/) — free mockups + UI kits
+- [LS Graphics](https://ls.graphics/free-mockups) — pro mockups, free section
+- [ambientCG](https://ambientcg.com/) — CC0 textures incl. grunge/scratch/imperfection overlays
+- [Poly Haven textures](https://polyhaven.com/textures) — CC0, seamless
+
+*Overlays: search "grunge / dust / scratch overlay PSD" on those sites — multiply-blend them in Illustrator (via raster) or map as textures in Blender.*
 
 ## 🎨 BLENDER (light, as requested)
 
