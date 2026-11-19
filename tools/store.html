@@ -702,11 +702,22 @@ const scrollTop = () => {
 };
 function gotoPage(p){
   state.page = p;
+  try{ history.pushState({q: state.q, sort: state.sort, page: p}, ""); }catch(e){}
   load();
   scrollTop();
 }
 prevBtn.addEventListener("click", () => gotoPage(state.page - 1));
 nextBtn.addEventListener("click", () => gotoPage(state.page + 1));
+
+window.addEventListener("popstate", e => {
+  const st = e.state;
+  if(!st || !st.q || favOpen || st.q !== state.q) return;
+  state.page = st.page || 1;
+  state.sort = st.sort || state.sort;
+  const sel = document.getElementById("sort");
+  if(sel) sel.value = state.sort;
+  load();
+});
 const totop = document.getElementById("totop");
 totop.addEventListener("click", () => {
   const m = window.matchMedia("(max-width:700px)");
