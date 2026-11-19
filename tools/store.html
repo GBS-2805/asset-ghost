@@ -59,6 +59,9 @@
   #morewrap{padding:0 18px 16px;display:flex;justify-content:center}
   #more{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 22px;font-size:14px;cursor:pointer}
   #more:hover{border-color:var(--accent);color:var(--accent)}
+  #totop{position:fixed;bottom:56px;right:26px;z-index:9;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--dim);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;transform:translateY(8px)}
+  #totop.show{opacity:1;pointer-events:auto;transform:none}
+  #totop:hover{color:var(--accent);border-color:var(--accent)}
   footer{padding:8px 18px;border-top:1px solid var(--line);color:var(--dim);font-size:11.5px}
   @media(max-width:700px){body{flex-direction:column}aside{width:100%;max-height:38vh;border-right:0;border-bottom:1px solid var(--line)}}
 </style>
@@ -105,6 +108,7 @@
   <div id="grid"></div>
   <div id="morewrap"><button id="more" hidden>Load 24 more ↓</button></div>
   <footer>Unauthenticated GitHub API: ~10 fresh searches/min — repeat clicks are free (cache). Budget left this minute: <span class="budget" id="budget">—</span>. Red ⚖ pill = GitHub couldn't auto-detect the license; open the repo and check before it enters the vault. "licenses only" hides those. Previews: first image from each repo's README, else GitHub's banner. <b>Never</b> paste a token into this file.</footer>
+  <button id="totop" aria-label="Back to top">↑</button>
 </main>
 <script>
 const PER_PAGE = 24;
@@ -505,6 +509,9 @@ liconly.addEventListener("change", () => {
   if(!favOpen && state.q) load();
 });
 moreBtn.addEventListener("click", () => { state.page += 1; load(); });
+const totop = document.getElementById("totop");
+grid.addEventListener("scroll", () => totop.classList.toggle("show", grid.scrollTop > 400));
+totop.addEventListener("click", () => grid.scrollTo({top: 0, behavior: "smooth"}));
 
 buildButtons();
 updateFavCount();
