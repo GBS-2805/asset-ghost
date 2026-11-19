@@ -109,7 +109,9 @@
   #navback{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:60}
 
   @media(max-width:700px){
-    body{flex-direction:column}
+    body{display:block;height:auto;min-height:100dvh}
+    main{display:block}
+    #grid{overflow:visible}
     #shelfbtn{display:inline-flex;align-items:center;gap:6px}
     aside{position:fixed;top:0;bottom:0;left:0;width:min(272px,82vw);max-height:none;z-index:70;transform:translateX(-105%);transition:transform .18s ease-out;box-shadow:8px 0 28px rgba(0,0,0,.35)}
     body.nav-open aside{transform:none}
@@ -419,7 +421,7 @@ const thumbObserver = ("IntersectionObserver" in window)
         const r = repoIndex.get(en.target.dataset.repo);
         if(r) upgradeThumb(r);
       });
-    }, {root: grid, rootMargin: "300px 0px"})
+    }, {root: window.matchMedia("(max-width:700px)").matches ? null : grid, rootMargin: "300px 0px"})
   : null;
 
 let FAVS = (() => { try{ return JSON.parse(localStorage.getItem("gh_favs") || "{}"); }catch(e){ return {}; } })();
@@ -683,7 +685,12 @@ liconly.addEventListener("change", () => {
 });
 moreBtn.addEventListener("click", () => { state.page += 1; load(); });
 const totop = document.getElementById("totop");
-totop.addEventListener("click", () => grid.scrollTo({top: 0, behavior: REDUCED ? "auto" : "smooth"}));
+totop.addEventListener("click", () => {
+  const m = window.matchMedia("(max-width:700px)");
+  const behavior = REDUCED ? "auto" : "smooth";
+  if(m.matches) window.scrollTo({top: 0, behavior});
+  else grid.scrollTo({top: 0, behavior});
+});
 
 const shelfBtn = document.getElementById("shelfbtn");
 const navbackEl = document.getElementById("navback");
