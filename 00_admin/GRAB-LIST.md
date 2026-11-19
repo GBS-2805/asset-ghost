@@ -44,6 +44,17 @@
 
 *Overlays: search "grunge / dust / scratch overlay PSD" on those sites — multiply-blend them in Illustrator (via raster) or map as textures in Blender.*
 
+## 🎨 PNG OVERLAYS & STICKER MOCKUPS — the poster finisher
+
+| What | Get it | Notes |
+|---|---|---|
+| **Fluent Emoji 3D** — 1,500+ glossy retro-3D renders (PNG/SVG) | [⬇ one-click ZIP](https://github.com/microsoft/fluentui-emoji/archive/refs/heads/main.zip) → `assets/*/3D` folders | MIT. Yes it's "emoji" — but the 3D style reads as stickers/decor, not chat icons |
+| **PSD sticker-freebie mockup** — one real open-source sticker mockup | [⬇ one-click ZIP](https://github.com/dennisreimers/sticker-mockup-freebie/archive/refs/heads/main.zip) | drop your art in the smart object |
+| Dust/light-leak/torn-paper PNG overlays | [Pixabay](https://pixabay.com/images/search/overlay%20texture/) · [Pexels](https://www.pexels.com/search/light%20leak/) | free, no attribution required — search "dust overlay", "paper tear" |
+| Vinyl/sticker-sheet PSD mockups | [mockups-design.com](https://mockups-design.com/?s=sticker) · [Unblast](https://unblast.com/?s=sticker) | presentation: your art on die-cut stickers |
+
+**Workflow in Illustrator:** place overlay PNG on top → blend mode Multiply (grunge) or Screen (dust/glows) → lower opacity 10–30%. Fastest "finished" look there is.
+
 ## 🎨 BLENDER (light, as requested)
 
 | What | Get it | Notes |
