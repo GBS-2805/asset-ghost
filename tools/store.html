@@ -74,6 +74,8 @@
   <nav id="catlist"></nav>
   <h2>Explore</h2>
   <nav id="xtralist"></nav>
+  <h2>DIY &amp; side-projects</h2>
+  <nav id="diylist"></nav>
 </aside>
 <main>
   <header>
@@ -149,6 +151,34 @@ const CATEGORIES = [
   ]},
   {group:"xtralist", label:"🔥 Trending this year", q:"created:>2026-01-01 stars:>50", sort:"best"},
   {group:"xtralist", label:"📦 Design lists & resources", q:"design resources stars:>500"},
+  {group:"diylist", label:"🤖 Android apps",      q:"topic:android topic:app stars:>500", subs:[
+    ["Flutter",   "topic:android topic:flutter stars:>200"],
+    ["Kotlin",    "topic:android topic:kotlin stars:>300"],
+    ["FOSS/privacy","topic:android topic:foss stars:>50"],
+  ]},
+  {group:"diylist", label:"📟 ESP32 / hardware",  q:"topic:esp32 stars:>100", subs:[
+    ["Displays / CYD","topic:esp32 display stars:>20"],
+    ["Firmware",      "topic:esp32 firmware stars:>50"],
+    ["Sensors / IoT", "topic:esp32 topic:iot stars:>30"],
+  ]},
+  {group:"diylist", label:"⚡ Arduino",             q:"topic:arduino stars:>200", subs:[
+    ["Displays / UI","topic:arduino display stars:>20"],
+    ["Robotics",     "topic:arduino robotics stars:>20"],
+    ["Sensors",      "topic:arduino sensor stars:>20"],
+  ]},
+  {group:"diylist", label:"🍓 Raspberry Pi",    q:"topic:raspberry-pi stars:>300", subs:[
+    ["Retro gaming","topic:raspberry-pi retro stars:>50"],
+    ["Homelab",     "topic:raspberry-pi homelab stars:>20"],
+  ]},
+  {group:"diylist", label:"🏠 Home automation", q:"topic:home-assistant stars:>100", subs:[
+    ["Dashboards",  "topic:home-assistant dashboard stars:>30"],
+    ["ESPHome/Zigbee","topic:home-assistant esphome stars:>10"],
+  ]},
+  {group:"diylist", label:"🛰️ Self-hosted apps", q:"topic:self-hosted stars:>500", subs:[
+    ["Media",        "topic:self-hosted media stars:>200"],
+    ["Files / cloud","topic:self-hosted cloud stars:>200"],
+    ["Privacy",      "topic:self-hosted privacy stars:>100"],
+  ]},
 ];
 
 const grid = document.getElementById("grid"), statusEl = document.getElementById("status"),
