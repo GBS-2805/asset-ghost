@@ -560,7 +560,7 @@ function effectiveQuery(){
 async function load(){
   if(!state.q) return;
   const my = ++reqId;
-  const append = state.page > 1;
+  const append = false;
   statusEl.className = "";
   statusEl.textContent = "";
   if(!append) showSkeletons();
