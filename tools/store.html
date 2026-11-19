@@ -510,7 +510,7 @@ liconly.addEventListener("change", () => {
 });
 moreBtn.addEventListener("click", () => { state.page += 1; load(); });
 const totop = document.getElementById("totop");
-grid.addEventListener("scroll", () => totop.classList.toggle("show", grid.scrollTop > 400));
+grid.addEventListener("scroll", () => totop.classList.toggle("show", grid.scrollTop > 250));
 totop.addEventListener("click", () => grid.scrollTo({top: 0, behavior: "smooth"}));
 
 buildButtons();
