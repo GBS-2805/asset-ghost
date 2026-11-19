@@ -187,6 +187,7 @@
 </main>
 <script>
 const PER_PAGE = 24;
+const CHUNK = 12;
 const TTL_MS = 6 * 60 * 60 * 1000;
 const CACHE_CAP = 60;
 const IMG_TTL_MS = 7 * 24 * 60 * 60 * 1000;
@@ -300,6 +301,7 @@ const grid = document.getElementById("grid"), statusEl = document.getElementById
       shelfMeta = document.getElementById("shelfmeta");
 let activeBtn = null;
 let lastItems = [];
+let pool = [];
 let state = {q:null, sort:"stars", page:1, total:0};
 let reqId = 0;
 let repoIndex = new Map();
@@ -569,16 +571,19 @@ async function load(){
     const filtered = liconly.checked
       ? items.filter(r => r.license && r.license.spdx_id && r.license.spdx_id !== "NOASSERTION")
       : items;
+    if(append) pool = pool.concat(filtered); else pool = filtered.slice();
     if(!append && !filtered.length && items.length) showEmpty();
-    else render(filtered, append);
-    const shown = Math.min(state.page * PER_PAGE, total);
+    else if(pool.length) render(pool.splice(0, CHUNK), append);
+    const shown = Math.min(state.page * PER_PAGE - pool.length, total);
     const licenseNote = liconly.checked ? " (license-filtered)" : "";
     statusEl.textContent = items.length
-      ? (liconly.checked ? filtered.length + " licensed of " + items.length + " shown · " : "Showing " + shown + " of ") +
-        total.toLocaleString() + " total" + licenseNote + ". ⚖ = check the license before it enters the vault."
-      : "Nothing found — try loosening filters.";
-    moreBtn.hidden = shown >= total || !items.length;
-    if(!moreBtn.hidden) moreBtn.textContent = "Load 24 more ↓ (of " + total.toLocaleString() + ")";
+      ? (liconly.checked ? filtered.length + " licensed of " + items.length + " fetched \u00b7 " : "Showing " + shown + " of ") +
+        total.toLocaleString() + " total" + licenseNote + ". \u2696 = check the license before it enters the vault."
+      : "Nothing found \u2014 try loosening filters.";
+    moreBtn.hidden = (!pool.length && shown >= total) || !items.length;
+    moreBtn.textContent = pool.length
+      ? "Show " + Math.min(CHUNK, pool.length) + " more \u2193 (already downloaded \u2014 free)"
+      : "Load " + PER_PAGE + " more \u2193 (of " + total.toLocaleString() + ")";
   }catch(e){
     if(my !== reqId) return;
     statusEl.className = "err";
@@ -686,7 +691,10 @@ licSel.addEventListener("change", () => {
 liconly.addEventListener("change", () => {
   if(!favOpen && state.q) load();
 });
-moreBtn.addEventListener("click", () => { state.page += 1; load(); });
+moreBtn.addEventListener("click", () => {
+  if(pool.length){ render(pool.splice(0, CHUNK), true); if(!pool.length && state.page * PER_PAGE >= state.total) moreBtn.hidden = true; }
+  else { state.page += 1; load(); }
+});
 const totop = document.getElementById("totop");
 totop.addEventListener("click", () => {
   const m = window.matchMedia("(max-width:700px)");
