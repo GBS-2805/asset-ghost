@@ -13,6 +13,15 @@
 | **KiCad official 3D library** — thousands of STEP parts | [⬇ one-click ZIP (1.2 GB)](https://github.com/KiCad/kicad-packages3D/archive/refs/heads/master.zip) — or browse [Folders](https://github.com/KiCad/kicad-packages3D) and grab single `.step` | connectors, components, enclosures — massive STEP sandbox |
 | **FreeCAD parts library** — bolts, gears, electronics, furniture, architectural pieces | [⬇ one-click ZIP](https://github.com/FreeCAD/FreeCAD-library/archive/refs/heads/master.zip) | mixed formats; STEP/FCStd — useful man-made parts for hard-surface scenes |
 
+### 🖨 3D-print & real-model reference
+
+| What | Get it | Notes |
+|---|---|---|
+| **Voron CoreXY printer** — full engineering of a real machine | [⬇ one-click ZIP](https://github.com/VoronDesign/Voron-2/archive/refs/heads/Voron2.4.zip) — 150+ printable STLs + DXF drawings | 4.6k★. Real industrial part design, plasticity-relevant geometry |
+| **Voron community mods** — hundreds of printable upgrades | [⬇ one-click ZIP (3.9 GB — big!)](https://github.com/VoronDesign/VoronUsers/archive/refs/heads/main.zip) or [browse folders](https://github.com/VoronDesign/VoronUsers) | real-world functional parts galore |
+| **Prusa i3 MK3S** — official printer printed parts | [⬇ one-click ZIP](https://github.com/prusa3d/Original-Prusa-i3/archive/refs/heads/MK3S.zip) | STLs + one assembly STEP |
+| **NASA 3D models** — 342 real spacecraft/tool scans (STL) | ⚠ HUGE (5 GB) — [browse folders](https://github.com/nasa/NASA-3D-Resources) | reference the real thing — rovers, engines, tools |
+
 ## 📸 MOCKUPS / OVERLAYS / GRUNGE — poster ammo
 
 | What | Get it | Notes |
